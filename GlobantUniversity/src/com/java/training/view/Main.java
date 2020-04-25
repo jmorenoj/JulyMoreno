@@ -189,14 +189,27 @@ public class Main {
 
 			case 10: { /* Create Student */
 
-				studentName = globant.readString("the student name");
+				
 				personalId = globant.readNumber("the personal ID");
-				studentAge = globant.readNumber("the student age");
-				globant.createStudent(studentName, personalId, studentAge);
-				System.out.println("\n    Courses availables:\n");
-				globant.printCoursesList();
-				System.out.println("\n");
-				courseCode = globant.readNumber("the course code to enroll");
+				Student student = globant.searchStudentPersonalId(personalId);
+				
+				if (student == null) {
+					studentName = globant.readString("the student name");
+					studentAge = globant.readNumber("the student age");
+					System.out.println("\n    Courses availables:\n");
+					globant.printCoursesList();
+					System.out.println("\n");
+					courseCode = globant.readNumber("the course code to enroll");
+					Course course = globant.searchCourseByCode(courseCode);
+					if (course == null) {
+						System.out.println("Course doesn't exist - please review the course code entered");
+					} else {
+						System.out.println(globant.createStudent(studentName, personalId, studentAge, course));
+					}
+
+				} else {
+					System.out.println("\nStudent " + personalId + " already exist in the University");
+				}
 
 				break;
 			}

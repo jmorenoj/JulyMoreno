@@ -338,21 +338,21 @@ public class University {
 
 //	************************************************************************
 
-	public String createStudent(String studentName, int personalId, int age) {
+	public String createStudent(String studentName, int personalId, int age, Course course) {
 
-		// Falta añadirlos a los cursos ... hay un metodo que hace eso
-		Student student = searchStudentPersonalId(personalId);
-
-		if (student == null) {
+//		// Falta añadirlos a los cursos ... hay un metodo que hace eso
+//		Student student = searchStudentPersonalId(personalId);
+//
+//		if (student == null) {
 			Student newStudent = new Student(studentName, personalId, age);
 			arrayStudent.add(newStudent);
 
-			return "Student " + studentName + " enrolled in University";
+			return "Student " + studentName + " enrolled in the University";
 
-		} else {
-
-			return "Student" + studentName + " already exist in the University";
-		}
+//		} else {
+//
+//			return "Student" + studentName + " already exist in the University";
+//		}
 	}
 
 	public String createFullTimeTeacher(String teacherName, int personalId, String agreementType, double baseSalary,

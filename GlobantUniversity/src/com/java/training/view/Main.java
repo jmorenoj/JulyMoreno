@@ -144,46 +144,14 @@ public class Main {
 
 			case 9: { /* Create Course */
 
-				courseName = globant.readString("the course name");
-				courseName = courseName.toLowerCase();
-				Course course = globant.searchCourseByName(courseName);
+				courseName = globant.askForNullCourse();
+				classroom = globant.readNumber("the classroom assigned");
+				Teacher teacher = globant.askForTeacher();
+				Student student = globant.askForStudent();
+				
+				System.out.println(globant.createCourse(courseName, classroom, teacher, student));
+				
 
-				if (course == null) {
-
-					classroom = globant.readNumber("the classroom assigned");
-					System.out.println("\n    Assign teacher:\n");
-					globant.printTeachersList();
-					System.out.println("\n");
-
-					teacherCode = globant.readNumber("the teacher code to assign");
-					Teacher teacher = globant.searchTeacherCode(teacherCode);
-
-					if (teacher == null) {
-
-						System.out.println("\nTeacher doesn't exist - Please review the teacher code entered");
-
-					}
-
-					else {
-
-						System.out.println("\n    Students to enroll:\n");
-						globant.printStudentsList();
-						System.out.println("\n");
-						studentCode = globant.readNumber("the student code to enroll");
-						Student student = globant.searchStudentCode(studentCode);
-						if (student == null) {
-							System.out.println("\nStudent doesn't exist - Please review the student code entered");
-						} else {
-							System.out.println(globant.createCourse(courseName, classroom, teacher, student));
-
-						}
-					}
-
-				}
-
-				else {
-					System.out.println("\nCourse" + courseName + " already exist in the University");
-				}
 				break;
 			}
 

@@ -473,4 +473,46 @@ public class University {
 		this.arrayCourse = arrayCourse;
 	}
 
+	public String askForNullCourse() {
+		Course course;
+		String courseName;
+		courseName = this.readString("the course name").toLowerCase();
+		course = this.searchCourseByName(courseName);
+		if (course != null) {
+			System.out.println("Course already exits.");
+			courseName= this.askForNullCourse();
+		}
+		return courseName;
+	}
+
+	public Teacher askForTeacher() {
+		
+		System.out.println("\n    Assign teacher:\n");
+		this.printTeachersList();
+		System.out.println("\n");
+
+		int teacherCode = this.readNumber("the teacher code to assign");
+		Teacher teacher = this.searchTeacherCode(teacherCode);
+
+		if (teacher == null) {
+			System.out.println("\nTeacher doesn't exist - Please review the teacher code entered");
+			teacher=this.askForTeacher();
+		}
+		return teacher;
+	}
+
+	public Student askForStudent() {
+
+		System.out.println("\n    Students to enroll:\n");
+		this.printStudentsList();
+		System.out.println("\n");
+		int studentCode = this.readNumber("the student code to enroll");
+		Student student = this.searchStudentCode(studentCode);
+		if (student == null) {
+			System.out.println("\nStudent doesn't exist - Please review the student code entered");
+			student= this.askForStudent();
+		} 
+		return student;
+	}
+
 }

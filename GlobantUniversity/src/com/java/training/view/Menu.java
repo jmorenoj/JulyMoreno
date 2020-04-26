@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.java.training.controller.University;
 import com.java.training.model.Course;
-import com.java.training.model.FullTimeTeacher;
 import com.java.training.model.Student;
 import com.java.training.model.Teacher;
 
@@ -22,8 +21,6 @@ public class Menu {
 		String studentName;
 		String agreementType;
 		int baseSalary;
-		int activeHours;
-		int experienceYears;
 		int personalId;
 		int studentCode;
 		int teacherCode;
@@ -99,12 +96,13 @@ public class Menu {
 						"---------------------------------------------------------------------------------------------------------------------");
 				do {
 					courseCode = globant.readNumber("the course code or 0 to return the menu");
+					if(courseCode != 0) {
 					System.out.println(
 							"-----------------------------------------------  Course Information  ------------------------------------------------");
 					globant.printCourseByCode(courseCode);
 					System.out.println(
 							"---------------------------------------------------------------------------------------------------------------------");
-
+					}
 				} while (courseCode != 0);
 
 				break;
@@ -163,7 +161,6 @@ public class Menu {
 				studentName = globant.readString("the student name");
 				studentAge = globant.readNumber("the student age");
 				ArrayList<Course> arrayListCourse = globant.askForCourses();
-
 				System.out.println(globant.createStudent(studentName, personalId, studentAge, arrayListCourse));
 
 				break;
@@ -176,20 +173,8 @@ public class Menu {
 				teacherName = globant.readString("the teacher name");
 				baseSalary = globant.readNumber("the base salary");
 				agreementType = globant.askForAgreementType();
-				if (agreementType.equals("full time")) {
-					experienceYears = globant.readNumber("the teacher experience years");
-					result = globant.createFullTimeTeacher(teacherName, personalId, agreementType, baseSalary,
-							experienceYears);
-				} else {
-					activeHours = globant.readNumber("the active hours per month");
-					result = globant.createParTimeTeacher(teacherName, personalId, agreementType, baseSalary,
-							activeHours);
-				}
-				Course course = globant.askForCourse();
-				course.setTeacher(globant.searchTeacherPersonalId(personalId));
-
+				result = globant.createTeacher(personalId,teacherName,baseSalary,agreementType);
 				System.out.println("\n" + result);
-
 				break;
 			}
 

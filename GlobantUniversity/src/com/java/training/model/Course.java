@@ -1,6 +1,7 @@
 package com.java.training.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Course {
@@ -40,6 +41,7 @@ public class Course {
 
 	/** This method print the students enrolled in one course */
 	public void printAssignedStudent() {
+		Collections.sort(arrayStudentInCourse);
 		for (Student student : arrayStudentInCourse)
 			student.printStudentsList();
 	};
@@ -53,6 +55,15 @@ public class Course {
 		System.out.println("Number of Students: " + arrayStudentInCourse.size());
 	};
 
+	/** This method print the list of courses */
+	public String toString() {
+		return "Course Code: " + this.courseCode + " \n"
+		+"Course Name: " + this.courseName + " \n"
+		+"Classroom: " + this.classroom + " \n"
+		+"Teacher: " + this.getTeacher().getTeacherName() + " \n"
+		+"Number of Students: " + arrayStudentInCourse.size();
+	};
+
 	/** This method add one student's array to a course */
 	public void addStudentToCourse(List<Student> arrayStudentInCourse) {
 		this.arrayStudentInCourse.addAll(arrayStudentInCourse);
@@ -61,9 +72,9 @@ public class Course {
 	/** This method add one student to a course */
 	public void addStudentToCourse(Student... arrayStudent) {
 		for (Student student : arrayStudent)
-			if (arrayStudentInCourse.contains(student)) 
+			if (arrayStudentInCourse.contains(student))
 				System.out.println(student.getStudentName() + " is already in the course" + this.getCourseName());
-			 else
+			else
 				arrayStudentInCourse.add(student);
 	}
 
@@ -102,10 +113,6 @@ public class Course {
 
 	public List<Student> getArrayStudentInCourse() {
 		return arrayStudentInCourse;
-	}
-
-	private void setArrayStudentInCourse(List<Student> arrayStudentInCourse) {
-		this.arrayStudentInCourse = arrayStudentInCourse;
 	}
 
 	/** This method generate the course code */

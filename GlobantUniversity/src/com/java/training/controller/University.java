@@ -90,7 +90,7 @@ public class University {
 		if (tempCourse == null) {
 			System.out.println("Course doesn't exist - Please review course's code");
 		} else {
-			tempCourse.printCourseInformation();
+			System.out.println(tempCourse);
 			System.out.println("\n*** Students List ***\n");
 			tempCourse.printAssignedStudent();
 		}
@@ -316,7 +316,7 @@ public class University {
 		arrayStudent.add(newStudent);
 
 		for (Course newCourse : arrayCourses) {
-			newCourse.addStudentToCourse();
+			newCourse.addStudentToCourse(newStudent);
 		}
 
 		return "\nStudent " + studentName + " enrolled in the University\n";
@@ -363,12 +363,13 @@ public class University {
 	/** This method reads numbers inputs */
 	public int readNumber(String messsage) {
 		try {
+			@SuppressWarnings("resource")
 			Scanner scan = new Scanner(System.in);
 			System.out.println("Please type " + messsage);
 			int option = scan.nextInt();
-
+			System.out.println("Closing Scanner...");
 			return option;
-
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Error. Please type a valid option");
@@ -379,6 +380,7 @@ public class University {
 	/** This method reads Strings inputs */
 	public String readString(String phrase) {
 		try {
+			@SuppressWarnings("resource")
 			Scanner scan = new Scanner(System.in);
 			String line;
 			System.out.println("Please type " + phrase);
@@ -394,51 +396,6 @@ public class University {
 	/**
 	 * Validation Methods
 	 **/
-
-	/** This method validate if a Course already exist in Courses List */
-	public String askForNullCourse() {
-		Course course;
-		String courseName;
-		courseName = this.readString("the course name").toLowerCase();
-		course = this.searchCourseByName(courseName);
-		if (course != null) {
-			System.out.println("Course already exist\n");
-			courseName = this.askForNullCourse();
-		}
-		return courseName;
-	}
-
-	/** This method validate if a Teacher code exist in Teachers List */
-	public Teacher askForTeacher() {
-
-		System.out.println("\n    Assign teacher:\n");
-		this.printTeachersList();
-		System.out.println("\n");
-
-		int teacherCode = this.readNumber("the teacher code to assign");
-		Teacher teacher = this.searchTeacherCode(teacherCode);
-
-		if (teacher == null) {
-			System.out.println("\nTeacher doesn't exist - Please review the teacher code entered");
-			teacher = this.askForTeacher();
-		}
-		return teacher;
-	}
-
-	/** This method validate if a Student code exist in Students List */
-	public Student askForStudent() {
-
-		System.out.println("\n    Students to enroll:\n");
-		this.printStudentsList();
-		System.out.println("\n");
-		int studentCode = this.readNumber("the student code to enroll");
-		Student student = this.searchStudentCode(studentCode);
-		if (student == null) {
-			System.out.println("\nStudent doesn't exist - Please review the student code entered");
-			student = this.askForStudent();
-		}
-		return student;
-	}
 
 	public ArrayList<Student> askForStudents() {
 
@@ -561,20 +518,64 @@ public class University {
 		this.arrayCourse = arrayCourse;
 	}
 
+//	public String askForNullCourse() {
+//		Course course;
+//		String courseName;
+//		courseName = this.readString("the course name").toLowerCase();
+//		course = this.searchCourseByName(courseName);
+//		if (course != null) {
+//			System.out.println("Course already exits.");
+//			courseName= this.askForNullCourse();
+//		}
+//		return courseName;
+//	}
+//
+//	public Teacher askForTeacher() {
+//		
+//		System.out.println("\n    Assign teacher:\n");
+//		this.printTeachersList();
+//		System.out.println("\n");
+//
+//		int teacherCode = this.readNumber("the teacher code to assign");
+//		Teacher teacher = this.searchTeacherCode(teacherCode);
+//
+//		if (teacher == null) {
+//			System.out.println("\nTeacher doesn't exist - Please review the teacher code entered");
+//			teacher=this.askForTeacher();
+//		}
+//		return teacher;
+//	}
+//
+//	public Student askForStudent() {
+//
+//		System.out.println("\n    Students to enroll:\n");
+//		this.printStudentsList();
+//		System.out.println("\n");
+//		int studentCode = this.readNumber("the student code to enroll");
+//		Student student = this.searchStudentCode(studentCode);
+//		if (student == null) {
+//			System.out.println("\nStudent doesn't exist - Please review the student code entered");
+//			student= this.askForStudent();
+//		} 
+//		return student;
+//	}
+//	
+	/** This method validate if a Course already exist in Courses List */
 	public String askForNullCourse() {
 		Course course;
 		String courseName;
 		courseName = this.readString("the course name").toLowerCase();
 		course = this.searchCourseByName(courseName);
 		if (course != null) {
-			System.out.println("Course already exits.");
-			courseName= this.askForNullCourse();
+			System.out.println("Course already exist\n");
+			courseName = this.askForNullCourse();
 		}
 		return courseName;
 	}
 
+	/** This method validate if a Teacher code exist in Teachers List */
 	public Teacher askForTeacher() {
-		
+
 		System.out.println("\n    Assign teacher:\n");
 		this.printTeachersList();
 		System.out.println("\n");
@@ -584,11 +585,12 @@ public class University {
 
 		if (teacher == null) {
 			System.out.println("\nTeacher doesn't exist - Please review the teacher code entered");
-			teacher=this.askForTeacher();
+			teacher = this.askForTeacher();
 		}
 		return teacher;
 	}
 
+	/** This method validate if a Student code exist in Students List */
 	public Student askForStudent() {
 
 		System.out.println("\n    Students to enroll:\n");
@@ -598,9 +600,26 @@ public class University {
 		Student student = this.searchStudentCode(studentCode);
 		if (student == null) {
 			System.out.println("\nStudent doesn't exist - Please review the student code entered");
-			student= this.askForStudent();
-		} 
+			student = this.askForStudent();
+		}
 		return student;
+	}
+
+	/*
+	 * This method create a new Teacher and enroll the teacher to a existing course
+	 */
+	public String createTeacher(int personalId, String teacherName, int baseSalary, String agreementType) {
+		String result;
+		if (agreementType.equals("full time")) {
+			int experienceYears = this.readNumber("the teacher experience years");
+			result = this.createFullTimeTeacher(teacherName, personalId, agreementType, baseSalary, experienceYears);
+		} else {
+			int activeHours = this.readNumber("the active hours per month");
+			result = this.createParTimeTeacher(teacherName, personalId, agreementType, baseSalary, activeHours);
+		}
+		Course course = this.askForCourse();
+		course.setTeacher(this.searchTeacherPersonalId(personalId));
+		return result;
 	}
 
 }

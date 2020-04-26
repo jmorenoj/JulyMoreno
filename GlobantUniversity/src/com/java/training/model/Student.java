@@ -1,6 +1,6 @@
 package com.java.training.model;
 
-public class Student {
+public class Student implements Comparable<Student> {
 
 	private String studentName;
 	private int personalId;
@@ -69,6 +69,19 @@ public class Student {
 	private int generateStudentCode() {
 		increase = increase + 1;
 		return increase;
+	}
+	
+	/*
+	 * This method set the attribute and order in which the students array is going to be sorted
+	 * When Collections.sort(arrayStudent) is invoked
+	 */
+	@Override
+	public int compareTo(Student student) {
+		// TODO Auto-generated method stub
+		/* For Ascending order*/
+		return this.getStudentCode()-student.getStudentCode();
+        /* For Descending order do like this */
+        //return student.getStudentCode()-this.getStudentCode();
 	}
 
 }

@@ -10,7 +10,7 @@ public class FullTimeTeacher extends Teacher {
 
 	@Override
 	public double calculateTeacherSalary() {
-		return getBaseSalary() * 1.1 * getExperienceYears();
+		return Math.round( getBaseSalary() * 1.1 * getExperienceYears());
 	}
 
 }

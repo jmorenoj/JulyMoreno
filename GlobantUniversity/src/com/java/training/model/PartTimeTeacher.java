@@ -9,7 +9,7 @@ public class PartTimeTeacher extends Teacher {
 
 	@Override
 	public double calculateTeacherSalary() {
-		return getBaseSalary() * getActiveHours();
+		return Math.round(getBaseSalary() * getActiveHours());
 	}
 
 }

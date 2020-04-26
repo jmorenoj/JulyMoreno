@@ -22,7 +22,10 @@ public class Course {
 
 	public Course(String courseName, int classroom, Teacher teacher, List<Student> arrayStudentInCourse) {
 		this(courseName, classroom, teacher);
-		this.arrayStudentInCourse = arrayStudentInCourse;
+		for (Student student : arrayStudentInCourse) {
+			addStudentToCourse(student);
+		}
+//		this.arrayStudentInCourse = arrayStudentInCourse;
 	}
 
 	public Course(String courseName, int classroom, Teacher teacher, Student... arrayStudent) {
@@ -46,7 +49,7 @@ public class Course {
 		System.out.print("Course Code: " + this.courseCode + " | ");
 		System.out.print("Course Name: " + this.courseName + " | ");
 		System.out.print("Classroom: " + this.classroom + " | ");
-		System.out.print("Teacher: " + this.getTeacher() + " | ");
+		System.out.print("Teacher: " + this.getTeacher().getTeacherName() + " | ");
 		System.out.println("Number of Students: " + arrayStudentInCourse.size());
 	};
 
@@ -58,8 +61,11 @@ public class Course {
 	/** This method add one student to a course */
 	public void addStudentToCourse(Student... arrayStudent) {
 		for (Student student : arrayStudent)
-			arrayStudentInCourse.add(student);
-	};
+			if (arrayStudentInCourse.contains(student)) 
+				System.out.println(student.getStudentName() + " is already in the course" + this.getCourseName());
+			 else
+				arrayStudentInCourse.add(student);
+	}
 
 	/** Getters and Setters */
 	public String getCourseName() {
@@ -101,7 +107,7 @@ public class Course {
 	private void setArrayStudentInCourse(List<Student> arrayStudentInCourse) {
 		this.arrayStudentInCourse = arrayStudentInCourse;
 	}
-	
+
 	/** This method generate the course code */
 	private final int generateCourseCode() {
 		increase = increase + 1;

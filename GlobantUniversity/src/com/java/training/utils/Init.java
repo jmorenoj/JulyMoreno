@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.java.training.model.Course;
-import com.java.training.model.FullTimeTeacher;
-import com.java.training.model.PartTimeTeacher;
-import com.java.training.model.Student;
-import com.java.training.model.Teacher;
+import com.java.training.model.staff.FullTimeTeacher;
+import com.java.training.model.staff.PartTimeTeacher;
+import com.java.training.model.staff.Student;
+import com.java.training.model.staff.Teacher;
 
 public class Init {
 
-	public static List<Teacher> initTeacher() {
+	public static List<Teacher> initTeachers() {
 
-		List<Teacher> arrayTeacher;
+		List<Teacher> arrayTeachers;
 
 		FullTimeTeacher fullTeacher1 = new FullTimeTeacher("Camila Caputo", 1022349906, "full time", 1000000, 1);
 		FullTimeTeacher fullTeacher2 = new FullTimeTeacher("Cesar Bayona", 1022349907, "full time", 1000000, 2);
@@ -27,24 +27,24 @@ public class Init {
 		PartTimeTeacher partTeacher4 = new PartTimeTeacher("Jessica Cardona", 1022349914, "part time", 100000, 40);
 		PartTimeTeacher partTeacher5 = new PartTimeTeacher("Jesus Barrios", 1022349915, "part time", 100000, 50);
 
-		arrayTeacher = new ArrayList<Teacher>();
-		arrayTeacher.add(fullTeacher1);
-		arrayTeacher.add(fullTeacher2);
-		arrayTeacher.add(fullTeacher3);
-		arrayTeacher.add(fullTeacher4);
-		arrayTeacher.add(fullTeacher5);
-		arrayTeacher.add(partTeacher1);
-		arrayTeacher.add(partTeacher2);
-		arrayTeacher.add(partTeacher3);
-		arrayTeacher.add(partTeacher4);
-		arrayTeacher.add(partTeacher5);
+		arrayTeachers = new ArrayList<Teacher>();
+		arrayTeachers.add(fullTeacher1);
+		arrayTeachers.add(fullTeacher2);
+		arrayTeachers.add(fullTeacher3);
+		arrayTeachers.add(fullTeacher4);
+		arrayTeachers.add(fullTeacher5);
+		arrayTeachers.add(partTeacher1);
+		arrayTeachers.add(partTeacher2);
+		arrayTeachers.add(partTeacher3);
+		arrayTeachers.add(partTeacher4);
+		arrayTeachers.add(partTeacher5);
 
-		return arrayTeacher;
+		return arrayTeachers;
 	}
 
 	public static List<Student> initStudents() {
 
-		List<Student> arrayStudent;
+		List<Student> arrayStudents;
 
 		Student student1 = new Student("Adriana Guzman", 1022349904, 32);
 		Student student2 = new Student("Alberto Robles", 1022349900, 18);
@@ -57,45 +57,47 @@ public class Init {
 		Student student9 = new Student("Mauricio Sierra", 1022349919, 27);
 		Student student10 = new Student("Mario Celis", 1022349920, 22);
 
-		arrayStudent = new ArrayList<Student>();
-		arrayStudent.add(student1);
-		arrayStudent.add(student2);
-		arrayStudent.add(student3);
-		arrayStudent.add(student4);
-		arrayStudent.add(student5);
-		arrayStudent.add(student6);
-		arrayStudent.add(student7);
-		arrayStudent.add(student8);
-		arrayStudent.add(student9);
-		arrayStudent.add(student10);
+		arrayStudents = new ArrayList<Student>();
+		arrayStudents.add(student1);
+		arrayStudents.add(student2);
+		arrayStudents.add(student3);
+		arrayStudents.add(student4);
+		arrayStudents.add(student5);
+		arrayStudents.add(student6);
+		arrayStudents.add(student7);
+		arrayStudents.add(student8);
+		arrayStudents.add(student9);
+		arrayStudents.add(student10);
 
-		return arrayStudent;
+		return arrayStudents;
 
 	}
 
-	public static List<Course> initCourses(List<Student> arrayStudent, List<Teacher> arrayTeacher) {
+	public static List<Course> initCourses(List<Student> arrayStudents, List<Teacher> arrayTeachers) {
 
-		List<Course> arrayCourse;
+		List<Course> arrayCourses;
 
 		/*Static positions */
-		Course class1 = new Course("algebra", 101, arrayTeacher.get(0), arrayStudent.get(9), arrayStudent.get(1), arrayStudent.get(2), arrayStudent.get(5),arrayStudent.get(0));
-		Course class2 = new Course("mathematics", 102, arrayTeacher.get(1), arrayStudent.get(3), arrayStudent.get(4), arrayStudent.get(5));
-		Course class3 = new Course("geometry", 103, arrayTeacher.get(2), arrayStudent.get(6), arrayStudent.get(7), arrayStudent.get(8));
-		Course class4 = new Course("biology", 104, arrayTeacher.get(5), arrayStudent.get(9), arrayStudent.get(0), arrayStudent.get(8));
-		Course class5 = new Course("music", 105, arrayTeacher.get(6), arrayStudent.get(1), arrayStudent.get(2), arrayStudent.get(6), arrayStudent.get(7));
-		Course class6 = new Course("science", 106, arrayTeacher.get(7), arrayStudent);
-		Course class7 = new Course("art", 107, arrayTeacher.get(8), arrayStudent);
-		
-		arrayCourse = new ArrayList<Course>();
-		arrayCourse.add(class1);
-		arrayCourse.add(class2);
-		arrayCourse.add(class3);
-		arrayCourse.add(class4);
-		arrayCourse.add(class5);
-		arrayCourse.add(class6);
-		arrayCourse.add(class7);
+		Course class1 = new Course("algebra", 101, arrayTeachers.get(0), arrayStudents);
+		Course class2 = new Course("arts", 102, arrayTeachers.get(1), arrayStudents.get(0), arrayStudents.get(1), arrayStudents.get(2), arrayStudents.get(3),arrayStudents.get(4));
+		Course class3 = new Course("biology", 103, arrayTeachers.get(2), arrayStudents.get(5), arrayStudents.get(6), arrayStudents.get(7), arrayStudents.get(8));
+		Course class4 = new Course("english", 104, arrayTeachers.get(3), arrayStudents.get(9), arrayStudents.get(1), arrayStudents.get(2));
+		Course class5 = new Course("geometry", 105, arrayTeachers.get(5), arrayStudents);
+		Course class6 = new Course("mathematics", 106, arrayTeachers.get(6), arrayStudents.get(3), arrayStudents.get(4));
+		Course class7 = new Course("music", 107, arrayTeachers.get(7), arrayStudents.get(5), arrayStudents.get(6), arrayStudents.get(7), arrayStudents.get(8));
+		Course class8 = new Course("science", 108, arrayTeachers.get(8), arrayStudents.get(9), arrayStudents.get(1), arrayStudents.get(2), arrayStudents.get(3));		
+				
+		arrayCourses = new ArrayList<Course>();
+		arrayCourses.add(class1);
+		arrayCourses.add(class2);
+		arrayCourses.add(class3);
+		arrayCourses.add(class4);
+		arrayCourses.add(class5);
+		arrayCourses.add(class6);
+		arrayCourses.add(class7);
+		arrayCourses.add(class8);
 
-		return arrayCourse;
+		return arrayCourses;
 	}
 
 }

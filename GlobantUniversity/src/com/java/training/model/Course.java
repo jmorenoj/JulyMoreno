@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.java.training.model.staff.Student;
+import com.java.training.model.staff.Teacher;
+
 public class Course {
 
 	private String courseName;
@@ -21,13 +24,15 @@ public class Course {
 		arrayStudentInCourse = new ArrayList<Student>();
 	}
 
+
 	public Course(String courseName, int classroom, Teacher teacher, List<Student> arrayStudentInCourse) {
 		this(courseName, classroom, teacher);
 		for (Student student : arrayStudentInCourse) {
 			addStudentToCourse(student);
 		}
-//		this.arrayStudentInCourse = arrayStudentInCourse;
+
 	}
+
 
 	public Course(String courseName, int classroom, Teacher teacher, Student... arrayStudent) {
 		this(courseName, classroom, teacher);
@@ -46,7 +51,7 @@ public class Course {
 			student.printStudentsList();
 	};
 
-	/** This method print the list of courses */
+	/** This method print all courses list */
 	public void printCourseInformation() {
 		System.out.print("Course Code: " + this.courseCode + " | ");
 		System.out.print("Course Name: " + this.courseName + " | ");
@@ -55,7 +60,7 @@ public class Course {
 		System.out.println("Number of Students: " + arrayStudentInCourse.size());
 	};
 
-	/** This method print the list of courses */
+	/** This method print a single course information */
 	public String toString() {
 		return "Course Code: " + this.courseCode + " \n"
 		+"Course Name: " + this.courseName + " \n"
@@ -64,12 +69,12 @@ public class Course {
 		+"Number of Students: " + arrayStudentInCourse.size();
 	};
 
-	/** This method add one student's array to a course */
+	/** This method add one students' array to a course */
 	public void addStudentToCourse(List<Student> arrayStudentInCourse) {
 		this.arrayStudentInCourse.addAll(arrayStudentInCourse);
 	}
 
-	/** This method add one student to a course */
+	/** This method add a single student to a course */
 	public void addStudentToCourse(Student... arrayStudent) {
 		for (Student student : arrayStudent)
 			if (arrayStudentInCourse.contains(student))
@@ -99,7 +104,7 @@ public class Course {
 		return courseCode;
 	}
 
-	public void setCourseCode(int courseCode) {
+	private void setCourseCode(int courseCode) {
 		this.courseCode = courseCode;
 	}
 

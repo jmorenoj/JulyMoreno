@@ -26,9 +26,9 @@ public class University {
 	private List<Course> arrayCourses;
 
 	public University() {
-		this.arrayTeachers = Init.initTeachers();
-		this.arrayStudents = Init.initStudents();
-		this.arrayCourses = Init.initCourses(arrayStudents, arrayTeachers);
+		setArrayTeachers(Init.initTeachers());
+		setArrayStudents(Init.initStudents());
+		setArrayCourses(Init.initCourses(arrayStudents, arrayTeachers));
 	}
 
 	/**
@@ -305,6 +305,7 @@ public class University {
 	public String createStudent(String studentName, int personalId, int age, int courseCode) {
 
 		Student newStudent = new Student(studentName, personalId, age);
+		Init.saveStudent(newStudent);
 		arrayStudents.add(newStudent);
 		Course newCourse = searchCourseByCode(courseCode);
 		newCourse.addStudentToCourse(newStudent);
@@ -319,6 +320,7 @@ public class University {
 	public String createStudent(String studentName, int personalId, int age, List<Course> arrayCourses) {
 
 		Student newStudent = new Student(studentName, personalId, age);
+		Init.saveStudent(newStudent);
 		arrayStudents.add(newStudent);
 
 		for (Course newCourse : arrayCourses) {
@@ -372,6 +374,7 @@ public class University {
 		Teacher newFullTimeTeacher = new FullTimeTeacher(teacherName, personalId, agreementType, baseSalary,
 				experienceYears);
 		arrayTeachers.add(newFullTimeTeacher);
+		Init.saveTeacher(newFullTimeTeacher);
 		return "Full Time Teacher " + teacherName + " enrolled in the University.";
 	}
 
@@ -381,6 +384,7 @@ public class University {
 		Teacher newPartTimeTeacher = new PartTimeTeacher(teacherName, personalId, agreementType, baseSalary,
 				activeHours);
 		arrayTeachers.add(newPartTimeTeacher);
+		Init.saveTeacher(newPartTimeTeacher);
 		return "Part Time Teacher " + teacherName + " enrolled in the University.";
 	}
 

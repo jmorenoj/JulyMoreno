@@ -1,4 +1,4 @@
-package com.java.training.model.staff;
+package com.java.training.model;
 
 public class PartTimeTeacher extends Teacher {
 
@@ -9,7 +9,7 @@ public class PartTimeTeacher extends Teacher {
 
 	@Override
 	public double calculateTeacherSalary() {
-		return Math.round(getBaseSalary() * getActiveHours());
+		return getBaseSalary() * getActiveHours();
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.java.training.model.staff;
+package com.java.training.model;
 
 public abstract class Teacher {
 
@@ -20,14 +20,10 @@ public abstract class Teacher {
 
 	}
 
-	/**
-	 * Method to implement the salary calculation according with the agreement type
-	 */
 	public abstract double calculateTeacherSalary();
 
-	/** Method to print all teachers */
 	public void printTeachersList() {
-		if (agreementType.equals("full time")) {
+		if (agreementType == "Full Time") {
 			System.out.print("Teacher Code: " + this.teacherCode + " | ");
 			System.out.print("Teacher Name: " + this.teacherName + " | ");
 			System.out.print("Personal Id: " + this.personalId + " | ");
@@ -35,7 +31,7 @@ public abstract class Teacher {
 			System.out.print("Base salary: " + this.baseSalary + " | ");
 			System.out.print("Experience Years: " + this.experienceYears + " | ");
 			System.out.println("Salary: " + this.calculateTeacherSalary());
-		} else if (agreementType.equals("part time")) {
+		} else if (agreementType == "Part Time") {
 			System.out.print("Teacher Code: " + this.teacherCode + " | ");
 			System.out.print("Teacher Name: " + this.teacherName + " | ");
 			System.out.print("Personal Id: " + this.personalId + " | ");
@@ -48,24 +44,33 @@ public abstract class Teacher {
 		}
 	}
 
-	/** Method to print a single teacher */
 	public void printTeacher() {
-		if (agreementType.equals("full time")) {
-			System.out.println("Teacher Code: " + this.teacherCode + "\n" + "Teacher Name: " + this.teacherName + "\n"
-					+ "Personal Id: " + this.personalId + "\n" + "Type of Agreement: " + this.agreementType + "\n"
-					+ "Base salary: " + this.baseSalary + "\n" + "Experience Years: " + this.experienceYears + "\n"
-					+ "Salary: " + this.calculateTeacherSalary());
-		} else if (agreementType.equals("part time")) {
-			System.out.println("Teacher Code: " + this.teacherCode + "\n" + "Teacher Name: " + this.teacherName + "\n"
-					+ "Personal Id: " + this.personalId + "\n" + "Type of Agreement: " + this.agreementType + "\n"
-					+ "Base salary: " + this.baseSalary + "\n" + "Active Hours per month: " + this.activeHours + "\n"
-					+ "Salary: " + this.calculateTeacherSalary());
+		if (agreementType == "Full Time") {
+			System.out.println("Teacher Code: " + this.teacherCode + "\n" +
+		    "Teacher Name: " + this.teacherName + "\n" +
+			"Personal Id: " + this.personalId + "\n" +
+			"Type of Agreement: " + this.agreementType + "\n" +
+			"Base salary: " + this.baseSalary + "\n" +
+			"Experience Years: " + this.experienceYears + "\n" +
+			"Salary: " + this.calculateTeacherSalary());
+		} else if (agreementType == "Part Time") {
+			System.out.println("Teacher Code: " + this.teacherCode + "\n" +
+			"Teacher Name: " + this.teacherName + "\n" +
+			"Personal Id: " + this.personalId + "\n" +
+			"Type of Agreement: " + this.agreementType + "\n" +
+			"Base salary: " + this.baseSalary + "\n" +
+			"Active Hours per month: " + this.activeHours + "\n" +
+			"Salary: " + this.calculateTeacherSalary());
 		} else {
 			System.out.println("Type of Agreement doesn't exist");
 		}
 	}
-
-	/** Getters and Setters */
+	
+	
+	@Override
+	public String toString() {
+		return this.teacherName;
+	}
 
 	public String getTeacherName() {
 		return teacherName;
@@ -87,7 +92,7 @@ public abstract class Teacher {
 		return teacherCode;
 	}
 
-	protected void setTeacherCode(int teacherCode) {
+	public void setTeacherCode(int teacherCode) {
 		this.teacherCode = teacherCode;
 	}
 

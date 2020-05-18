@@ -1,6 +1,6 @@
-package com.java.training.model.staff;
+package com.java.training.model;
 
-public class Student implements Comparable<Student> {
+public class Student {
 
 	private String studentName;
 	private int personalId;
@@ -15,7 +15,7 @@ public class Student implements Comparable<Student> {
 		setAge(age);
 	}
 
-	/** This method prints all the Student list*/
+	/** This method prints the Student list*/
 	public void printStudentsList() {
 		System.out.print("Student Code: " + this.studentCode + " | ");
 		System.out.print("Student Name: " + this.studentName + " | ");
@@ -23,7 +23,7 @@ public class Student implements Comparable<Student> {
 		System.out.println("Student Age: " + this.age);
 	}
 
-	/** This method prints one single Student */
+	/** This method prints one Student information*/
 	public void printStudent() {
 		System.out.println(
 		"Student Code: " + this.studentCode + "\n" +
@@ -69,18 +69,6 @@ public class Student implements Comparable<Student> {
 	private int generateStudentCode() {
 		increase = increase + 1;
 		return increase;
-	}
-	
-	/*
-	 * This method set the attribute and order in which the students array is going to be sorted
-	 * When Collections.sort(arrayStudent) is invoked
-	 */
-	
-	@Override
-	public int compareTo(Student student) {
-		/* For Ascending order*/
-		return this.getStudentCode()-student.getStudentCode();
-
 	}
 
 }

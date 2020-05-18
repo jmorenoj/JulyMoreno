@@ -1,4 +1,4 @@
-package com.java.training.model.staff;
+package com.java.training.model;
 
 public class FullTimeTeacher extends Teacher {
 
@@ -10,7 +10,7 @@ public class FullTimeTeacher extends Teacher {
 
 	@Override
 	public double calculateTeacherSalary() {
-		return Math.round( getBaseSalary() * 1.1 * getExperienceYears());
+		return getBaseSalary() * 1.1 * getExperienceYears();
 	}
 
 }

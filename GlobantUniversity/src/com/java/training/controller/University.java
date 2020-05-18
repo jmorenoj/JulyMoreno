@@ -9,48 +9,106 @@
 package com.java.training.controller;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.List;
 import java.util.Scanner;
 
-import com.java.training.utils.Init;
+import com.java.training.model.FullTimeTeacher;
+import com.java.training.model.PartTimeTeacher;
+import com.java.training.model.Student;
+import com.java.training.model.Teacher;
 import com.java.training.model.Course;
-import com.java.training.model.staff.FullTimeTeacher;
-import com.java.training.model.staff.PartTimeTeacher;
-import com.java.training.model.staff.Student;
-import com.java.training.model.staff.Teacher;
 
 public class University {
-//
-	private List<Teacher> arrayTeachers;
-	private List<Student> arrayStudents;
-	private List<Course> arrayCourses;
+
+	private List<Teacher> arrayTeacher;
+	private List<Student> arrayStudent;
+	private List<Course> arrayCourse;
+
+	Student student1 = new Student("Adriana Guzman", 1022349904, 32);
+	Student student2 = new Student("Alberto Robles", 1022349900, 18);
+	Student student3 = new Student("Alejandro Agudelo", 1022349901, 30);
+	Student student4 = new Student("Andres Acosta", 1022349902, 26);
+	Student student5 = new Student("David Suarez", 1022349903, 20);
+	Student student6 = new Student("Veronica Oliveto", 1022349916, 21);
+	Student student7 = new Student("Ricardo Gonzalez", 1022349917, 19);
+	Student student8 = new Student("Patricio Marino", 1022349918, 31);
+	Student student9 = new Student("Mauricio Sierra", 1022349919, 27);
+	Student student10 = new Student("Mario Celis", 1022349920, 22);
+
+	FullTimeTeacher fullteacher1 = new FullTimeTeacher("Camila Caputo", 1022349906, "Full Time", 1000000, 1);
+	FullTimeTeacher fullteacher2 = new FullTimeTeacher("Cesar Bayona", 1022349907, "Full Time", 1000000, 2);
+	FullTimeTeacher fullteacher3 = new FullTimeTeacher("David Ortegon", 1022349908, "Full Time", 1000000, 3);
+	FullTimeTeacher fullteacher4 = new FullTimeTeacher("Estefania Gomez", 1022349909, "Full Time", 1000000, 4);
+	FullTimeTeacher fullteacher5 = new FullTimeTeacher("Fernando Collazos", 1022349910, "Full Time", 1000000, 5);
+
+	PartTimeTeacher partteacher1 = new PartTimeTeacher("Gonzalo Nieto", 1022349911, "Part Time", 100000, 10);
+	PartTimeTeacher partteacher2 = new PartTimeTeacher("Guillermo Mugnaini", 1022349912, "Part Time", 100000, 20);
+	PartTimeTeacher partteacher3 = new PartTimeTeacher("Hugo Garcia", 1022349913, "Part Time", 100000, 30);
+	PartTimeTeacher partteacher4 = new PartTimeTeacher("Jessica Cardona", 1022349914, "Part Time", 100000, 40);
+	PartTimeTeacher partteacher5 = new PartTimeTeacher("Jesus Barrios", 1022349915, "Part Time", 100000, 50);
+
+	Course class1 = new Course("algebra", 101, fullteacher1, student1, student8, student10);
+	Course class2 = new Course("mathematics", 102, fullteacher2, student2);
+	Course class3 = new Course("geometry", 103, fullteacher1, student2, student3, student4);
+	Course class4 = new Course("biology", 104, fullteacher1, student1);
+	Course class5 = new Course("physics", 105, fullteacher1, student1, student2, student3, student4);
+//	Course class6 = new Course("GeometryII", 104, partteacher1, arrayStudent);
 
 	public University() {
-		setArrayTeachers(Init.initTeachers());
-		setArrayStudents(Init.initStudents());
-		setArrayCourses(Init.initCourses(arrayStudents, arrayTeachers));
+
+		arrayCourse = new ArrayList<Course>();
+		arrayCourse.add(class1);
+		arrayCourse.add(class2);
+		arrayCourse.add(class3);
+		arrayCourse.add(class4);
+		arrayCourse.add(class5);
+//		arrayCourse.add(class6);
+
+		arrayTeacher = new ArrayList<Teacher>();
+		arrayTeacher.add(fullteacher1);
+		arrayTeacher.add(fullteacher2);
+		arrayTeacher.add(fullteacher3);
+		arrayTeacher.add(fullteacher4);
+		arrayTeacher.add(fullteacher5);
+		arrayTeacher.add(partteacher1);
+		arrayTeacher.add(partteacher2);
+		arrayTeacher.add(partteacher3);
+		arrayTeacher.add(partteacher4);
+		arrayTeacher.add(partteacher5);
+
+		arrayStudent = new ArrayList<Student>();
+		arrayStudent.add(student1);
+		arrayStudent.add(student2);
+		arrayStudent.add(student3);
+		arrayStudent.add(student4);
+		arrayStudent.add(student5);
+
+//		class2.addStudentToCourse(student1, student4, student5);
+//		class4.addStudentToCourse(student2);
+//		class1.addStudentToCourse(arrayStudent);
+
 	}
 
+//****************************************************************************************************************
 	/**
 	 * Print Methods
 	 **/
 
 	/** This method print all teachers in the list arrayTeacher */
 	public void printTeachersList() {
-		for (int i = 0; i < arrayTeachers.size(); i++) {
-			arrayTeachers.get(i).printTeachersList();
+		for (int i = 0; i < arrayTeacher.size(); i++) {
+			arrayTeacher.get(i).printTeachersList();
 		}
 	}
 
 	/**
-	 * This method print the teacher information according with a teacher code given
+	 * This method print the teacher information according with one teacherCode
+	 * given
 	 */
 	public void printTeacherByCode(int teacherCode) {
 		Teacher temTeacher = searchTeacherCode(teacherCode);
 		if (temTeacher == null) {
-			System.out.println("Teacher doesn't exist - Please review the teacher code entered");
+			System.out.println("Teacher doesn't exist - Please review teacher code entered");
 		} else {
 			temTeacher.printTeacher();
 		}
@@ -58,18 +116,18 @@ public class University {
 
 	/** This method print all students in the list arrayStudent */
 	public void printStudentsList() {
-		for (Student student : arrayStudents)
+		for (Student student : arrayStudent)
 			student.printStudentsList();
 
 	}
 
 	/**
-	 * This method print the student information according with a student code given
+	 * This method print the student information according with a studentCode given
 	 */
 	public void printStudentByCode(int studentCode) {
 		Student tempStudent = searchStudentCode(studentCode);
 		if (tempStudent == null) {
-			System.out.println("Student doesn't exist - Please review the student code entered");
+			System.out.println("Student doesn't exist - Please review student's code entered");
 
 		} else {
 			tempStudent.printStudent();
@@ -78,28 +136,28 @@ public class University {
 
 	/** This method print all courses in the list arrayCourse */
 	public void printCoursesList() {
-		for (Course course : arrayCourses) {
+		for (Course course : arrayCourse) {
 			course.printCourseInformation();
 		}
 	}
 
 	/**
-	 * This method print the course information according with a course code given
+	 * This method print the course information according with a courseCode given
 	 */
 	public void printCourseByCode(int courseCode) {
 		Course tempCourse = searchCourseByCode(courseCode);
 		if (tempCourse == null) {
-			System.out.println("Course doesn't exist - Please review the course code entered");
+			System.out.println("Course doesn't exist - Please review course's code");
 		} else {
-			System.out.println(tempCourse);
-			System.out.println("\n***** Students List *****\n");
+			tempCourse.printCourseInformation();
+			System.out.println("\n*** Students List ***\n");
 			tempCourse.printAssignedStudent();
 		}
 	}
 
 	/**
 	 * This method print all the courses managed by one teacher according with a
-	 * teacher code given
+	 * teacherCode given
 	 */
 	public void printCoursesByTeacher(int teacherCode) {
 
@@ -122,7 +180,7 @@ public class University {
 
 	/**
 	 * This method print all the courses in which one student was enrolled according
-	 * with a student code given
+	 * with a studentCode given
 	 */
 	public void printCoursesByStudent(int studentCode) {
 
@@ -151,10 +209,10 @@ public class University {
 
 	/**
 	 * This method shows if one student exist in the list arrayStudent according
-	 * with a personal ID given
+	 * with a personalId given
 	 */
 	public Student searchStudentPersonalId(int personalId) {
-		for (Student student : arrayStudents) {
+		for (Student student : arrayStudent) {
 			if (student.getPersonalId() == personalId) {
 				return student;
 			}
@@ -164,10 +222,10 @@ public class University {
 
 	/**
 	 * This method shows if one student exist in the list arrayStudent according
-	 * with a student code given
+	 * with a studentCode given
 	 */
 	public Student searchStudentCode(int studentCode) {
-		for (Student student : arrayStudents) {
+		for (Student student : arrayStudent) {
 			if (student.getStudentCode() == studentCode) {
 				return student;
 			}
@@ -185,10 +243,10 @@ public class University {
 	 */
 	public Teacher searchTeacherPersonalId(int personalId) {
 
-		for (int i = 0; i < arrayTeachers.size(); i++) {
+		for (int i = 0; i < arrayTeacher.size(); i++) {
 
-			if (arrayTeachers.get(i).getPersonalId() == personalId) {
-				return arrayTeachers.get(i);
+			if (arrayTeacher.get(i).getPersonalId() == personalId) {
+				return arrayTeacher.get(i);
 			}
 		}
 		return null;
@@ -196,32 +254,13 @@ public class University {
 
 	/**
 	 * This method shows if one teacher exist in the list arrayTeacher according
-	 * with a teacher code given
+	 * with a teacherCode given
 	 */
 	public Teacher searchTeacherCode(int teacherCode) {
-		for (Teacher teacher : arrayTeachers) {
+		for (Teacher teacher : arrayTeacher) {
 			if (teacher.getTeacherCode() == teacherCode) {
 				return teacher;
 			}
-		}
-		return null;
-	}
-
-	/**
-	 * This method shows if the agreement type is valid to create a teacher
-	 **/
-
-	public String searchAgreementType(String agreementType) {
-
-		List<String> arrayAgreementType = new ArrayList<String>();
-		arrayAgreementType.add("full time");
-		arrayAgreementType.add("part time");
-
-		for (String agreement : arrayAgreementType) {
-			if (agreement.equals(agreementType)) {
-				return agreementType;
-			}
-
 		}
 		return null;
 	}
@@ -232,14 +271,14 @@ public class University {
 
 	/**
 	 * This method shows if one course exist in the list arrayCourse according with
-	 * a course name given
+	 * a courseName given
 	 */
 	public Course searchCourseByName(String courseName) {
 
-		for (int i = 0; i < arrayCourses.size(); i++) {
+		for (int i = 0; i < arrayCourse.size(); i++) {
 
-			if (arrayCourses.get(i).getCourseName().equals(courseName)) {
-				return arrayCourses.get(i);
+			if (arrayCourse.get(i).getCourseName().equals(courseName)) {
+				return arrayCourse.get(i);
 			}
 		}
 		return null;
@@ -250,7 +289,7 @@ public class University {
 	 * a courseCode given
 	 */
 	public Course searchCourseByCode(int courseCode) {
-		for (Course course : arrayCourses) {
+		for (Course course : arrayCourse) {
 			if (course.getCourseCode() == courseCode) {
 				return course;
 			}
@@ -261,14 +300,14 @@ public class University {
 
 	/**
 	 * This method shows all the courses managed by a Teacher according with a
-	 * teacher code given
+	 * teacherCode given
 	 */
 	public List<String> searchCoursesByTeacher(int teacherCode) {
 
 		List<String> arrayCoursesByTeacher;
 		arrayCoursesByTeacher = new ArrayList<String>();
 
-		for (Course course : arrayCourses) {
+		for (Course course : arrayCourse) {
 			if (course.getTeacher().getTeacherCode() == teacherCode) {
 				arrayCoursesByTeacher.add(course.getCourseName());
 			}
@@ -278,13 +317,13 @@ public class University {
 
 	/**
 	 * This method shows all the courses in which an Student was enrolled according
-	 * with a student code given
+	 * with a studentCode given
 	 */
 	public List<String> searchCoursesByStudent(int studentCode) {
 		List<String> arrayCoursesByStudent;
 		arrayCoursesByStudent = new ArrayList<String>();
 
-		for (Course course : arrayCourses) {
+		for (Course course : arrayCourse) {
 			for (Student student : course.getArrayStudentInCourse()) {
 				if (student.getStudentCode() == studentCode) {
 					arrayCoursesByStudent.add(course.getCourseName());
@@ -297,97 +336,78 @@ public class University {
 
 	}
 
-	/**
-	 * Creation methods
-	 */
+//	************************************************************************
 
-	/**
-	 * This method create a new Student and enroll it into one existing course
-	 */
-	public String createStudent(String studentName, int personalId, int age, int courseCode) {
+	public String createStudent(String studentName, int personalId, int age, Course course) {
 
-		Student newStudent = new Student(studentName, personalId, age);
-		Init.saveStudent(newStudent);
-		arrayStudents.add(newStudent);
-		Course newCourse = searchCourseByCode(courseCode);
-		newCourse.addStudentToCourse(newStudent);
-		return "\nStudent " + studentName + " enrolled in the University\n" + "Course(s):\n" + " * "
-				+ newCourse.getCourseName();
+//		// Falta añadirlos a los cursos ... hay un metodo que hace eso
+//		Student student = searchStudentPersonalId(personalId);
+//
+//		if (student == null) {
+			Student newStudent = new Student(studentName, personalId, age);
+			arrayStudent.add(newStudent);
 
+			return "Student " + studentName + " enrolled in the University";
+
+//		} else {
+//
+//			return "Student" + studentName + " already exist in the University";
+//		}
 	}
 
-	/**
-	 * This method create a new Student and enroll it into several existing courses
-	 */
-	public String createStudent(String studentName, int personalId, int age, List<Course> arrayCourses) {
-
-		Student newStudent = new Student(studentName, personalId, age);
-		Init.saveStudent(newStudent);
-		arrayStudents.add(newStudent);
-
-		for (Course newCourse : arrayCourses) {
-			newCourse.addStudentToCourse(newStudent);
-		}
-
-		return "\nStudent " + studentName + " enrolled in the University.\n";
-	}
-
-	/**
-	 * This method create a new Course and assign one Teacher and one Student to the
-	 * course
-	 */
-	public String createCourse(String courseName, int classroom, Teacher teacher, Student student) {
-		Course newCourse = new Course(courseName, classroom, teacher, student);
-		arrayCourses.add(newCourse);
-		return "\nCourse " + courseName + " added to the University list of courses.";
-	}
-
-	/**
-	 * This method create a new Course and assign one Teacher and several Student to
-	 * the course
-	 */
-	public String createCourse(String courseName, int classroom, Teacher teacher, List<Student> arrayStudents) {
-		Course newCourse = new Course(courseName, classroom, teacher, arrayStudents);
-		arrayCourses.add(newCourse);
-		return "\nCourse " + courseName + " added to courses Database.";
-	}
-
-	/**
-	 * This method shows the result after create a new Teacher and enroll the
-	 * teacher to a existing course
-	 */
-	public String createTeacher(int personalId, String teacherName, int baseSalary, String agreementType) {
-		String result;
-		if (agreementType.equals("full time")) {
-			int experienceYears = this.readNumber("the teacher experience years");
-			result = this.createFullTimeTeacher(teacherName, personalId, agreementType, baseSalary, experienceYears);
-		} else {
-			int activeHours = this.readNumber("the active hours per month");
-			result = this.createPartTimeTeacher(teacherName, personalId, agreementType, baseSalary, activeHours);
-		}
-		Course course = this.askForCourse();
-		course.setTeacher(this.searchTeacherPersonalId(personalId));
-		return result;
-	}
-
-	/** This method create a Full Time Teacher */
 	public String createFullTimeTeacher(String teacherName, int personalId, String agreementType, double baseSalary,
 			int experienceYears) {
-		Teacher newFullTimeTeacher = new FullTimeTeacher(teacherName, personalId, agreementType, baseSalary,
-				experienceYears);
-		arrayTeachers.add(newFullTimeTeacher);
-		Init.saveTeacher(newFullTimeTeacher);
-		return "Full Time Teacher " + teacherName + " enrolled in the University.";
+		Teacher fullTimeTeacher = searchTeacherPersonalId(personalId);
+		agreementType = agreementType.toLowerCase();
+		if (fullTimeTeacher == null) {
+			Teacher newFullTimecher = new FullTimeTeacher(teacherName, personalId, agreementType, baseSalary,
+					experienceYears);
+			arrayTeacher.add(newFullTimecher);
+			return "Teacher " + teacherName + " enrolled in University";
+		} else {
+			return "Teacher" + teacherName + " already exist in the University";
+		}
 	}
 
-	/** This method create a Part Time Teacher */
-	public String createPartTimeTeacher(String teacherName, int personalId, String agreementType, double baseSalary,
+	public String createParTimeTeacher(String teacherName, int personalId, String agreementType, double baseSalary,
 			int activeHours) {
-		Teacher newPartTimeTeacher = new PartTimeTeacher(teacherName, personalId, agreementType, baseSalary,
-				activeHours);
-		arrayTeachers.add(newPartTimeTeacher);
-		Init.saveTeacher(newPartTimeTeacher);
-		return "Part Time Teacher " + teacherName + " enrolled in the University.";
+		Teacher partTimeTeacher = searchTeacherPersonalId(personalId);
+		agreementType = agreementType.toLowerCase();
+		if (partTimeTeacher == null) {
+			Teacher newPartTimecher = new PartTimeTeacher(teacherName, personalId, agreementType, baseSalary,
+					activeHours);
+			arrayTeacher.add(partTimeTeacher);
+			return "Teacher " + teacherName + " enrolled in University";
+		} else {
+			return "Teacher" + teacherName + " already exist in the University";
+		}
+	}
+
+	public String createCourse(String courseName, int classroom, Teacher teacher, Student student) {
+//
+//		courseName = courseName.toLowerCase();
+//		Course course = searchCourseByName(courseName);
+//
+//		if (course == null) {
+//
+//			Teacher teacher = searchTeacherCode(teacherCode);
+//
+//			if (teacher == null) {
+//				return "Teacher doesn't exist - Please review the teacher code entered";
+//			} else {
+//				
+		Course newCourse = new Course(courseName, classroom, teacher, student);
+//				Course newCourse = new Course(courseName, classroom, teacher);
+//
+		arrayCourse.add(newCourse);
+//
+		return "Course " + courseName + " added to University";
+//			}
+//
+//		} else {
+//			return "Course" + courseName + " already exist in the University";
+//		}
+//
 	}
 
 	/**
@@ -395,104 +415,78 @@ public class University {
 	 **/
 
 	/** This method reads numbers inputs */
-	@SuppressWarnings("resource")
 	public int readNumber(String messsage) {
-		Scanner scan = null;
-		int option=0;
 		try {
-			scan = new Scanner(System.in);
+			Scanner scan = new Scanner(System.in);
 			System.out.println("Please type " + messsage);
-			option = scan.nextInt();
+			int option = scan.nextInt();
+
 			return option;
-		}catch (InputMismatchException e) {
-			System.out.println("Error reading - Please type a valid option.\n");
-			return readNumber(messsage);
-		}catch (NoSuchElementException  e) {
-			System.out.println("Error reading - Please type a valid option.\n");
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error. Please type a valid option");
 			return readNumber(messsage);
 		}
-		catch (Exception e) {
-			System.out.println("Error reading - Please type a valid option.\n");
-			return readNumber(messsage);
-		}		
 	}
 
 	/** This method reads Strings inputs */
 	public String readString(String phrase) {
 		try {
-			@SuppressWarnings("resource")
 			Scanner scan = new Scanner(System.in);
 			String line;
 			System.out.println("Please type " + phrase);
 			line = scan.nextLine();
 			return line;
 		} catch (Exception e) {
-			System.out.println("Error reading - Please type a valid option.\n");
+			System.out.println("Error reading.");
 			return readString(phrase);
 		}
 
 	}
 
 	/**
-	 * Validation Methods
+	 * Getters and Setters
 	 **/
 
-	/** This method validate if a Student code exist in Students List */
-	public Student askForStudent() {
+	public List<Teacher> getArrayTeacher() {
+		return arrayTeacher;
+	}
 
-		System.out.println("\n    Students to enroll:\n");
-		this.printStudentsList();
-		System.out.println("\n");
-		int studentCode = this.readNumber("the student code to enroll");
-		Student student = this.searchStudentCode(studentCode);
-		if (student == null) {
-			System.out.println("\nStudent doesn't exist - Please review the student code entered.");
-			student = this.askForStudent();
+	public void setArrayTeacher(List<Teacher> arrayTeacher) {
+		this.arrayTeacher = arrayTeacher;
+	}
+
+	public List<Student> getArrayStudent() {
+		return arrayStudent;
+	}
+
+	public void setArrayStudent(List<Student> arrayStudent) {
+		this.arrayStudent = arrayStudent;
+	}
+
+	public List<Course> getArrayCourse() {
+		return arrayCourse;
+	}
+
+	public void setArrayCourse(List<Course> arrayCourse) {
+		this.arrayCourse = arrayCourse;
+	}
+
+	public String askForNullCourse() {
+		Course course;
+		String courseName;
+		courseName = this.readString("the course name").toLowerCase();
+		course = this.searchCourseByName(courseName);
+		if (course != null) {
+			System.out.println("Course already exits.");
+			courseName= this.askForNullCourse();
 		}
-		return student;
+		return courseName;
 	}
 
-	/**
-	 * This method allows to validate several student codes when a course is being
-	 * created
-	 */
-	public ArrayList<Student> askForStudents() {
-
-		int studentCode;
-		Student student = this.askForStudent();
-
-		ArrayList<Student> arrayListStudent = new ArrayList<Student>();
-		arrayListStudent.add(student);
-
-		do {
-			studentCode = this.readNumber("a new student code to add or 0 to continue ");
-			if (studentCode != 0) {
-				student = this.searchStudentCode(studentCode);
-				if (student == null) {
-					System.out.println("\nStudent doesn't exist - Please review the student code entered.");
-				} else {
-					arrayListStudent.add(student);
-				}
-			}
-		} while (studentCode != 0);
-		return arrayListStudent;
-	}
-
-	/** This method validate if a personal ID already exist in the Students List */
-	public int askForStudentId() {
-		int personalId = this.readNumber("the student personal ID");
-		Student student = this.searchStudentPersonalId(personalId);
-		if (student == null) {
-			return personalId;
-		}
-		System.out.println("Personal Id " + personalId + " " + student.getStudentName()
-				+ " already exist in Students Database.\n");
-		return this.askForStudentId();
-	}
-
-	/** This method validate if a Teacher code exist in Teachers List */
 	public Teacher askForTeacher() {
-
+		
 		System.out.println("\n    Assign teacher:\n");
 		this.printTeachersList();
 		System.out.println("\n");
@@ -501,116 +495,24 @@ public class University {
 		Teacher teacher = this.searchTeacherCode(teacherCode);
 
 		if (teacher == null) {
-			System.out.println("\nTeacher doesn't exist - Please review the teacher code entered.");
-			teacher = this.askForTeacher();
+			System.out.println("\nTeacher doesn't exist - Please review the teacher code entered");
+			teacher=this.askForTeacher();
 		}
 		return teacher;
 	}
 
-	/** This method validate if a Teacher personal ID exist in Teachers List */
-	public int askForTeacherId() {
-		int personalId = this.readNumber("the teacher personal ID");
-		Teacher teacher = this.searchTeacherPersonalId(personalId);
-		if (teacher == null) {
-			return personalId;
-		}
-		System.out.println("Personal Id " + personalId + " " + teacher.getTeacherName()
-				+ " already exist in Teachers Database.\n");
-		return this.askForTeacherId();
-	}
+	public Student askForStudent() {
 
-	/** This method validate if a Agreement type exist in Agreements List */
-	public String askForAgreementType() {
-		String agreementType = this.readString("the agreement type (full time / part time)");
-		agreementType = searchAgreementType(agreementType);
-		if (agreementType == null) {
-			System.out.println("\nAgreement type doesn't exist - Please review the agreement type entered.\n");
-			agreementType = this.askForAgreementType();
-		}
-		return agreementType;
-	}
-
-	/**
-	 * This method validate if a Course code exist in Courses List to assign it to
-	 * student or teacher
-	 */
-	public Course askForCourse() {
-		System.out.println("\n***** Courses availables to enroll *****\n");
-		this.printCoursesList();
+		System.out.println("\n    Students to enroll:\n");
+		this.printStudentsList();
 		System.out.println("\n");
-		int courseCode = this.readNumber("the course code to enroll: ");
-		Course course = this.searchCourseByCode(courseCode);
-		if (course == null) {
-			System.out.println("\nCourse code doesn't exist - Please review the course code entered.");
-			course = this.askForCourse();
-		}
-		return course;
-	}
-
-	/**
-	 * This method allows to validate several course codes when a student is being
-	 * created
-	 */
-	public ArrayList<Course> askForCourses() {
-
-		int courseCode;
-		Course course = this.askForCourse();
-		ArrayList<Course> arrayListCourse = new ArrayList<Course>();
-		arrayListCourse.add(course);
-
-		do {
-			courseCode = this.readNumber("a new course code to assign or 0 to continue.");
-			if (courseCode != 0) {
-				course = this.searchCourseByCode(courseCode);
-				if (course == null) {
-					System.out.println("\nCourse code doesn't exist - Please review the course code entered.");
-				} else {
-					arrayListCourse.add(course);
-				}
-			}
-		} while (courseCode != 0);
-		return arrayListCourse;
-	}
-
-	/** This method validate if a Course already exist in Courses List */
-	public String askForNullCourse() {
-		Course course;
-		String courseName;
-		courseName = this.readString("the course name").toLowerCase();
-		course = this.searchCourseByName(courseName);
-		if (course != null) {
-			System.out.println("Course already exist.\n");
-			courseName = this.askForNullCourse();
-		}
-		return courseName;
-	}
-
-	/**
-	 * Getters and Setters
-	 **/
-
-	public List<Teacher> getArrayTeachers() {
-		return arrayTeachers;
-	}
-
-	private void setArrayTeachers(List<Teacher> arrayTeachers) {
-		this.arrayTeachers = arrayTeachers;
-	}
-
-	public List<Student> getArrayStudents() {
-		return arrayStudents;
-	}
-
-	private void setArrayStudents(List<Student> arrayStudents) {
-		this.arrayStudents = arrayStudents;
-	}
-
-	public List<Course> getArrayCourses() {
-		return arrayCourses;
-	}
-
-	private void setArrayCourses(List<Course> arrayCourses) {
-		this.arrayCourses = arrayCourses;
+		int studentCode = this.readNumber("the student code to enroll");
+		Student student = this.searchStudentCode(studentCode);
+		if (student == null) {
+			System.out.println("\nStudent doesn't exist - Please review the student code entered");
+			student= this.askForStudent();
+		} 
+		return student;
 	}
 
 }

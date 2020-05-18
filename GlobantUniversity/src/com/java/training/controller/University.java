@@ -9,6 +9,8 @@
 package com.java.training.controller;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -393,20 +395,26 @@ public class University {
 	 **/
 
 	/** This method reads numbers inputs */
+	@SuppressWarnings("resource")
 	public int readNumber(String messsage) {
+		Scanner scan = null;
+		int option=0;
 		try {
-			@SuppressWarnings("resource")
-			Scanner scan = new Scanner(System.in);
+			scan = new Scanner(System.in);
 			System.out.println("Please type " + messsage);
-			int option = scan.nextInt();
-//			System.out.println("Closing Scanner...");
+			option = scan.nextInt();
 			return option;
-
-		} catch (Exception e) {
-			// TODO: handle exception
+		}catch (InputMismatchException e) {
+			System.out.println("Error reading - Please type a valid option.\n");
+			return readNumber(messsage);
+		}catch (NoSuchElementException  e) {
 			System.out.println("Error reading - Please type a valid option.\n");
 			return readNumber(messsage);
 		}
+		catch (Exception e) {
+			System.out.println("Error reading - Please type a valid option.\n");
+			return readNumber(messsage);
+		}		
 	}
 
 	/** This method reads Strings inputs */

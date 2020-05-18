@@ -6,6 +6,7 @@ import com.java.training.controller.University;
 import com.java.training.model.Course;
 import com.java.training.model.staff.Student;
 import com.java.training.model.staff.Teacher;
+//comment test
 
 public class Menu {
 
